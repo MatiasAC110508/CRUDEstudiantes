@@ -1,7 +1,3 @@
-estudiantes=[{"id":1, "nombre":"Robinson","apellido":"Urrego"},
-             {"id":2, "nombre":"juan","apellido":"perez"} ] # type: ignore
-
-
 def eliminar_estudiante():
     
 
@@ -30,6 +26,4 @@ def eliminar_estudiante():
         print("No se encontró un estudiante con ese ID.")
 
 
-eliminar_estudiante()
-print(estudiantes)
 
