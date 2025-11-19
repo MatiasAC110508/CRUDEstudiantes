@@ -15,10 +15,6 @@ try:
             servicios.readdata()
             
 
-        if student=="guardardatos" or student=="2":
-            print("guardado")
-            
-
         elif student=="crearestudiante" or student=="3":
             createstudent()
             print("creado")
