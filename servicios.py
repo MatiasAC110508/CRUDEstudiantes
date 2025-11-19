@@ -16,8 +16,7 @@ def createstudent():
     student.append(dicstudent)
 
 
-createstudent()
-print(student)
+
 
 
 
