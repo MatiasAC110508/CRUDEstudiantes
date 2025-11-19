@@ -1,12 +1,25 @@
 
-estudiantes=[{"id":1, "nombre":"Robinson","apellido":"Urrego"},
-             {"id":2, "nombre":"juan","apellido":"perez"} ] # type: ignore
+student=[]
 
-def readdata(estudiantes):
-    for read in estudiantes:
+def readdata():
+    for read in student:
         print (f"ID {read["id"]} NOMBRE {read["nombre"]} APELLIDO {read ["apellido"]}")
 
-readdata(estudiantes)
+
+def createstudent():
+    nombre=input("Ingrese el nombre--->")
+    apellido=input("Ingrese el apellido ")
+
+    dicstudent={"Id":len(student)+1,
+                "Nombre":nombre,
+                "Apellido":apellido}  
+    student.append(dicstudent)
+
+
+createstudent()
+print(student)
+
+
 
 
 
