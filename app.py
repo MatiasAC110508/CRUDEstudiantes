@@ -1,48 +1,71 @@
-import servicios
+from servicios import (
+   readdata, createstudent, actualizar_estudiante, eliminar_estudiante
+)
+from archivos import guardarJSON, exportarCSV
+import os
+
+def limpiar():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def mostrar_menu():
+    print("=" * 50)
+    print("        SISTEMA DE GESTIÓN DE ESTUDIANTES")
+    print("=" * 50)
+
+    print("""
+    1. Leer estudiantes
+    2. Guardar datos en JSON
+    3. Crear estudiante
+    4. Actualizar estudiante
+    5. Eliminar estudiante
+    6. Exportar CSV
+    7. Salir
+    """)
+
+    print("-" * 50)
 
 
-print("<------ESTUDIANTES----->")
-print("<-----Ingrese la opción que desea---->\n 1.Leer datos\n 2.Guardar datos\n 3.Crear estudiante\n" \
-" 4.Actualizar datos\n 5.Eliminar datos\n 6.Salir ")
+# ---------------------------
+# PROGRAMA PRINCIPAL
+# ---------------------------
+limpiar()
+while True:
+    mostrar_menu()
 
-student= input("Ingrese la opcion que desea ingresar ").replace(" ","").lower()
-check=True
+    opcion = input("Seleccione una opción: ").strip().lower()
 
-try:
-    while check:
+    limpiar()
 
-        if student=="leerdatos" or student=="1":
-            servicios.readdata()
-            
+    if opcion in ["1", "leer", "leerdatos"]:
+        print("===== LISTA DE ESTUDIANTES =====")
+        readdata()
 
-        if student=="guardardatos" or student=="2":
-            print("guardado")
-            
+    elif opcion in ["2", "guardar", "json", "guardardatos"]:
+        print("Guardando datos...")
+        guardarJSON()
 
-        elif student=="crearestudiante" or student=="3":
-            createstudent()
-            print("creado")
-            
+    elif opcion in ["3", "crear", "crearestudiante"]:
+        print("===== CREAR ESTUDIANTE =====")
+        createstudent()
 
-        elif student=="actualizardatos" or student=="4":
-            actualizar_estudiante()
-            print("actualizar")
-            
+    elif opcion in ["4", "actualizar", "actualizardatos"]:
+        print("===== ACTUALIZAR ESTUDIANTE =====")
+        actualizar_estudiante()
 
-        elif student=="eliminardatos" or student=="5":
-            eliminar_estudiante()
-            print("eliminado")
-            
+    elif opcion in ["5", "eliminar", "eliminardatos"]:
+        print("===== ELIMINAR ESTUDIANTE =====")
+        eliminar_estudiante()
 
-        elif student=="salir" or student=="6":       
-            print("salir")
-            break
-            
+    elif opcion in ["6", "csv", "exportarcsv"]:
+        print("Exportando CSV...")
+        exportarCSV()
 
-        else:
-            print("No se encontro la información solicitada ")
-        student= input("Ingrese la opcion que desea ingresar ").replace(" ","").lower()
+    elif opcion in ["7", "salir"]:
+        print("Saliendo del sistema... ¡Hasta luego!")
+        break
 
-            
-except SyntaxError:
-        print("Fallo el programa ")
+    else:
+        print("Opción no válida, intente nuevamente.")
+
+    input("\nPresione ENTER para continuar...")
+    limpiar()

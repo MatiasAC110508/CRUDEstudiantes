@@ -1,5 +1,29 @@
+# servicios.py
+estudiantes = []
+
+def readdata():
+    if not estudiantes:
+        print("No hay estudiantes registrados.")
+        return
+
+    for est in estudiantes:
+        print(f"ID: {est['id']}  NOMBRE: {est['nombre']}  APELLIDO: {est['apellido']}")
+
+def createstudent():
+    nombre = input("Ingrese el nombre: ")
+    apellido = input("Ingrese el apellido: ")
+
+    dicstudent = {
+        "id": len(estudiantes) + 1,
+        "nombre": nombre,
+        "apellido": apellido
+    }
+
+    estudiantes.append(dicstudent)
+    print("Estudiante creado exitosamente.")
+    return dicstudent
+
 def eliminar_estudiante():
-    
     if not estudiantes:
         print("No hay estudiantes por eliminar.")
         return
@@ -10,69 +34,37 @@ def eliminar_estudiante():
         print("El ID debe ser un número.")
         return
 
-    # Buscar estudiante por ID
-    indice_encontrado = None
-
-    for i,est in enumerate (estudiantes):
+    for i, est in enumerate(estudiantes):
         if est["id"] == id_buscar:
-            indice_encontrado = i
-            break
-            with open(DATA_FILE, 'w', encoding='utf-8') as file:
-            json.dump(estudiantes, file, indent=2, ensure_ascii=False)
-            
-    if indice_encontrado is not None:
-        estudiantes.pop(indice_encontrado)
-        print("Estudiante eliminado exitosamente.")
-    else:
-        print("No se encontró un estudiante con ese ID.")
+            estudiantes.pop(i)
+            print("Estudiante eliminado exitosamente.")
+            return
 
-def readdata(estudiantes):
-    for read in estudiantes:
-        print (f"ID {read["id"]} NOMBRE {read["nombre"]} APELLIDO {read ["apellido"]}")
+    print("No se encontró un estudiante con ese ID.")
 
-def createstudent():
-    nombre=input("Ingrese el nombre--->")
-    apellido=input("Ingrese el apellido ")
+def actualizar_estudiante():
+    if not estudiantes:
+        print("No hay estudiantes para actualizar.")
+        return
 
-    dicstudent={"Id":len(student)+1,
-                "Nombre":nombre,
-                "Apellido":apellido}  
-    
-    estudiantes.append(dicstudent)
-    with open(DATA_FILE, 'w', encoding='utf-8') as file:
-    json.dump(estudiantes, file, indent=2, ensure_ascii=False)
+    try:
+        id_input = int(input("Ingresa el ID del estudiante a actualizar: "))
+    except ValueError:
+        print("El ID debe ser un número.")
+        return
 
-import json
-
-# Archivo JSON
-DATA_FILE = 'data.json'
-
-def actualizar_estudiante(estudiantes, id_input, nuevo_nombre, nuevo_apellido):
-    # Cargar datos
-    with open(DATA_FILE, 'r', encoding='utf-8') as file:
-        estudiantes = json.load(file)
-
-    # Pedir ID del estudiante
-    id_input = int(input("Ingresa el ID del estudiante a actualizar: "))
-
-    # Buscar estudiante
     estudiante = next((e for e in estudiantes if e['id'] == id_input), None)
 
     if estudiante is None:
         print("Estudiante no encontrado.")
-    else:
-        print(f"Estudiante actual: {estudiante['nombre']} {estudiante['apellido']}")
+        return
 
-        # Pedir nuevos datos
-        nuevo_nombre = input("Nuevo nombre: ")
-        nuevo_apellido = input("Nuevo apellido: ")
+    print(f"Estudiante actual: {estudiante['nombre']} {estudiante['apellido']}")
 
-        # Actualizar datos
-        estudiante['nombre'] = nuevo_nombre
-        estudiante['apellido'] = nuevo_apellido
+    nuevo_nombre = input("Nuevo nombre: ")
+    nuevo_apellido = input("Nuevo apellido: ")
 
-        # Guardar cambios
-        with open(DATA_FILE, 'w', encoding='utf-8') as file:
-            json.dump(estudiantes, file, indent=2, ensure_ascii=False)
+    estudiante['nombre'] = nuevo_nombre
+    estudiante['apellido'] = nuevo_apellido
 
-        print("Estudiante actualizado exitosamente!")
+    print("Estudiante actualizado exitosamente!")
