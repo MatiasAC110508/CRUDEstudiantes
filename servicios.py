@@ -78,11 +78,7 @@
 
 
 
-student=[]
 
-def readdata():
-    for read in student:
-        print (f"ID {read["id"]} NOMBRE {read["nombre"]} APELLIDO {read ["apellido"]}")
 
 
 def createstudent():
