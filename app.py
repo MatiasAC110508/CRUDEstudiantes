@@ -20,14 +20,17 @@ try:
             
 
         elif student=="crearestudiante" or student=="3":
+            createstudent()
             print("creado")
             
 
         elif student=="actualizardatos" or student=="4":
+            actualizar_estudiante()
             print("actualizar")
             
 
         elif student=="eliminardatos" or student=="5":
+            eliminar_estudiante()
             print("eliminado")
             
 
