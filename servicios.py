@@ -1,6 +1,5 @@
 def eliminar_estudiante():
     
-
     if not estudiantes:
         print("No hay estudiantes por eliminar.")
         return
@@ -18,6 +17,8 @@ def eliminar_estudiante():
         if est["id"] == id_buscar:
             indice_encontrado = i
             break
+            with open(DATA_FILE, 'w', encoding='utf-8') as file:
+            json.dump(estudiantes, file, indent=2, ensure_ascii=False)
             
     if indice_encontrado is not None:
         estudiantes.pop(indice_encontrado)
@@ -25,81 +26,9 @@ def eliminar_estudiante():
     else:
         print("No se encontró un estudiante con ese ID.")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def readdata(estudiantes):
+    for read in estudiantes:
+        print (f"ID {read["id"]} NOMBRE {read["nombre"]} APELLIDO {read ["apellido"]}")
 
 def createstudent():
     nombre=input("Ingrese el nombre--->")
@@ -108,7 +37,10 @@ def createstudent():
     dicstudent={"Id":len(student)+1,
                 "Nombre":nombre,
                 "Apellido":apellido}  
-    student.append(dicstudent)
+    
+    estudiantes.append(dicstudent)
+    with open(DATA_FILE, 'w', encoding='utf-8') as file:
+    json.dump(estudiantes, file, indent=2, ensure_ascii=False)
 
 import json
 
